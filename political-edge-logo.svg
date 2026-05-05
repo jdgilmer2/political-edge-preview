@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Political Edge Logo</title>
+  <desc id="desc">Vector recreation of the Political Edge logo with a navy film-strip P, red edge marks, stars, and wordmark.</desc>
+  <defs>
+    <linearGradient id="navy" x1="350" y1="200" x2="760" y2="770" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b2759"/>
+      <stop offset="0.55" stop-color="#071f4b"/>
+      <stop offset="1" stop-color="#05183b"/>
+    </linearGradient>
+    <linearGradient id="red" x1="660" y1="450" x2="900" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d00418"/>
+      <stop offset="1" stop-color="#a90011"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.16"/>
+    </filter>
+    <path id="star" d="M0,-44 L10.5,-13.8 L42.4,-13.6 L16.8,5.2 L26.4,35.6 L0,17.5 L-26.4,35.6 L-16.8,5.2 L-42.4,-13.6 L-10.5,-13.8 Z"/>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <path fill="url(#navy)" fill-rule="evenodd" d="
+      M372 216
+      L610 216
+      C716 216 780 281 780 379
+      C780 475 709 535 606 535
+      L500 535
+      L500 768
+      L372 768
+      Z
+      M500 304
+      L612 304
+      C664 304 704 335 704 382
+      C704 428 670 459 611 459
+      L500 459
+      Z"/>
+
+    <path fill="#ffffff" d="M500 459 L431 565 L516 459 Z"/>
+
+    <g fill="#ffffff">
+      <rect x="387" y="238" width="23" height="23" rx="3"/>
+      <rect x="387" y="279" width="23" height="23" rx="3"/>
+      <rect x="387" y="320" width="23" height="23" rx="3"/>
+      <rect x="387" y="361" width="23" height="23" rx="3"/>
+      <rect x="387" y="402" width="23" height="23" rx="3"/>
+      <rect x="387" y="443" width="23" height="23" rx="3"/>
+      <rect x="387" y="484" width="23" height="23" rx="3"/>
+      <rect x="387" y="525" width="23" height="23" rx="3"/>
+      <rect x="387" y="566" width="23" height="23" rx="3"/>
+      <rect x="387" y="607" width="23" height="23" rx="3"/>
+      <rect x="387" y="648" width="23" height="23" rx="3"/>
+      <rect x="387" y="689" width="23" height="23" rx="3"/>
+      <rect x="387" y="730" width="23" height="23" rx="3"/>
+    </g>
+
+    <path fill="url(#red)" d="M764 454 L873 454 L832 529 L676 529 C715 511 744 486 764 454 Z"/>
+    <path fill="url(#red)" d="M696 588 L806 588 L775 648 L660 648 Z"/>
+    <path fill="url(#red)" d="M512 690 L803 690 L875 706 L831 769 L512 769 Z"/>
+
+    <path d="M0,-44 L10.5,-13.8 L42.4,-13.6 L16.8,5.2 L26.4,35.6 L0,17.5 L-26.4,35.6 L-16.8,5.2 L-42.4,-13.6 L-10.5,-13.8 Z" transform="translate(600 613) scale(0.92)" fill="#071f4b"/>
+  </g>
+
+  <g font-family="Montserrat, Avenir Next, Arial Black, Arial, sans-serif" font-weight="800" font-size="88" letter-spacing="14">
+    <text x="135" y="900" fill="#071f4b">POLITICAL</text>
+    <text x="773" y="900" fill="#ba0014">EDGE</text>
+  </g>
+
+  <g fill="none" stroke-linecap="square" stroke-width="4">
+    <path d="M290 943 L568 943" stroke="#071f4b"/>
+    <path d="M632 943 L912 943" stroke="#ba0014"/>
+  </g>
+  <path d="M0,-44 L10.5,-13.8 L42.4,-13.6 L16.8,5.2 L26.4,35.6 L0,17.5 L-26.4,35.6 L-16.8,5.2 L-42.4,-13.6 L-10.5,-13.8 Z" transform="translate(600 941) scale(0.48)" fill="#071f4b"/>
+</svg>
