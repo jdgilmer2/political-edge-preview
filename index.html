@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Political Edge</title>
+  <meta name="description" content="Campaign content and political media production built to be watched, felt, and remembered.">
+  <style>
+    :root {
+      --ink: #071735;
+      --navy: #061d49;
+      --navy-2: #0b2c64;
+      --red: #c70016;
+      --red-2: #e20a21;
+      --paper: #f5f6f8;
+      --white: #ffffff;
+      --muted: #aeb8c8;
+      --line: rgba(255, 255, 255, 0.16);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--white);
+      background: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+      background:
+        linear-gradient(125deg, rgba(199, 0, 22, 0.18), transparent 30%),
+        radial-gradient(circle at 78% 10%, rgba(23, 76, 155, 0.46), transparent 28%),
+        linear-gradient(180deg, #06142f 0%, #071735 45%, #f5f6f8 45%, #f5f6f8 100%);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px clamp(20px, 4vw, 56px);
+      background: rgba(6, 20, 47, 0.9);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      background: var(--white);
+      border-radius: 6px;
+      padding: 5px;
+    }
+
+    .brand span {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2vw, 28px);
+      color: #dbe3f1;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-cta {
+      padding: 11px 16px;
+      background: var(--red);
+      border-radius: 4px;
+      color: var(--white);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+      gap: clamp(28px, 4vw, 60px);
+      align-items: center;
+      min-height: calc(100vh - 82px);
+      padding: clamp(48px, 7vw, 90px) clamp(20px, 4vw, 56px) 52px;
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 24px;
+      color: #dbe3f1;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 3px;
+      background: var(--red);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin-bottom: 24px;
+      font-size: clamp(46px, 7vw, 96px);
+      line-height: 0.96;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .redline {
+      color: var(--red-2);
+    }
+
+    .hero-lede {
+      max-width: 650px;
+      color: #d7dfec;
+      font-size: clamp(18px, 2.1vw, 24px);
+      line-height: 1.46;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .button.primary {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .media-stack {
+      position: relative;
+      min-height: 610px;
+    }
+
+    .logo-plate {
+      position: absolute;
+      top: 0;
+      right: 7%;
+      width: min(52vw, 430px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+    }
+
+    .logo-plate img {
+      width: 84%;
+      height: 84%;
+      object-fit: contain;
+    }
+
+    .video-rail {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(48vw, 390px);
+      display: grid;
+      gap: 12px;
+    }
+
+    .video-tile {
+      position: relative;
+      min-height: 118px;
+      padding: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+        linear-gradient(90deg, rgba(5, 21, 54, 0.96), rgba(168, 0, 18, 0.82));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .video-tile:nth-child(2) {
+      transform: translateX(-44px);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+        linear-gradient(90deg, rgba(6, 31, 73, 0.96), rgba(8, 63, 124, 0.76));
+    }
+
+    .video-tile:nth-child(3) {
+      transform: translateX(-88px);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+        linear-gradient(90deg, rgba(162, 0, 16, 0.92), rgba(5, 21, 54, 0.88));
+    }
+
+    .play {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--red);
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .video-tile strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .video-tile span {
+      display: block;
+      margin-top: 7px;
+      color: #dbe3f1;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 56px);
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    .section.dark {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(320px, 1.12fr);
+      gap: clamp(28px, 5vw, 70px);
+      align-items: start;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 22px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .copy {
+      color: #32405a;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .dark .copy {
+      color: #d4ddeb;
+    }
+
+    .service-grid,
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .service,
+    .stat {
+      min-height: 132px;
+      padding: 22px;
+      border-radius: 6px;
+      background: var(--white);
+      border: 1px solid #e0e5ee;
+      box-shadow: 0 18px 45px rgba(7, 23, 53, 0.08);
+    }
+
+    .service {
+      display: flex;
+      align-items: end;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .service:nth-child(2),
+    .service:nth-child(5) {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+    }
+
+    .service:nth-child(3) {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .stats-intro {
+      max-width: 900px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .stats-intro p {
+      color: #d4ddeb;
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .stat {
+      min-height: 160px;
+      background: #0b244f;
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      box-shadow: none;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--red-2);
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 0.95;
+    }
+
+    .stat span {
+      color: #dbe3f1;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .about-lines {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .about-lines p {
+      margin: 0;
+      padding: 18px 0;
+      border-top: 1px solid #d8deea;
+      color: var(--ink);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .contact-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(30px, 4vw, 54px);
+      background: var(--white);
+      border-left: 8px solid var(--red);
+      color: var(--ink);
+      box-shadow: 0 28px 70px rgba(7, 23, 53, 0.14);
+    }
+
+    .contact-band h2 {
+      margin-bottom: 14px;
+    }
+
+    .contact-band p {
+      max-width: 680px;
+      color: #3d4960;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .placeholder {
+      color: #657089;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 26px clamp(20px, 4vw, 56px);
+      color: #dbe3f1;
+      background: #05132c;
+      font-size: 13px;
+    }
+
+    @media (max-width: 920px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .hero,
+      .split,
+      .contact-band {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .media-stack {
+        min-height: 520px;
+      }
+
+      .logo-plate {
+        left: 0;
+        right: auto;
+        width: min(82vw, 410px);
+      }
+
+      .video-rail {
+        width: min(88vw, 390px);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-list {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .brand span {
+        font-size: 12px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 12px;
+      }
+
+      .media-stack {
+        min-height: 470px;
+      }
+
+      .video-tile:nth-child(2),
+      .video-tile:nth-child(3) {
+        transform: none;
+      }
+
+      .service-grid,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="Political Edge home">
+        <img src="political-edge-logo.svg" alt="">
+        <span>Political Edge</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#advantage">Advantage</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Political Media Production</p>
+          <h1 id="hero-title">Campaign content built to be <span class="redline">felt.</span></h1>
+          <p class="hero-lede">We create videos that build presence, sharpen a candidate’s message, and give voters something to remember.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#contact">Start the Conversation</a>
+            <a class="button" href="#work">View the Approach</a>
+          </div>
+        </div>
+
+        <div class="media-stack" aria-label="Featured media preview placeholders">
+          <div class="logo-plate">
+            <img src="political-edge-logo.svg" alt="Political Edge logo">
+          </div>
+          <div class="video-rail">
+            <div class="video-tile">
+              <div class="play">▶</div>
+              <strong>Broadcast Commercial</strong>
+              <span>Placeholder for candidate spot</span>
+            </div>
+            <div class="video-tile">
+              <div class="play">▶</div>
+              <strong>Rapid Response</strong>
+              <span>Placeholder for short social clip</span>
+            </div>
+            <div class="video-tile">
+              <div class="play">▶</div>
+              <strong>Campaign Story</strong>
+              <span>Placeholder for behind-the-scenes feature</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="section">
+        <div class="split">
+          <div>
+            <p class="section-kicker">What We Do</p>
+            <h2>We help campaigns cut through.</h2>
+            <p class="copy">Political Edge turns ideas, speeches, events, and personal stories into high-impact video content built for today’s media environment.</p>
+            <p class="copy">Whether the campaign needs a polished commercial, a social clip, a behind-the-scenes feature, or a full content strategy, we make the message watchable, memorable, and emotionally clear.</p>
+          </div>
+          <div class="service-grid" aria-label="Political Edge services">
+            <div class="service">Campaign commercials</div>
+            <div class="service">Social media video content</div>
+            <div class="service">Rapid-response clips</div>
+            <div class="service">Behind-the-scenes features</div>
+            <div class="service">Scripting, filming, and editing</div>
+            <div class="service">Ad placement and voter targeting</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="advantage" class="section dark">
+        <div class="stats-intro">
+          <p class="section-kicker">Social Media Advantage</p>
+          <h2>The campaign trail is on the phone.</h2>
+          <p>Voters are watching clips, sharing posts, reacting to videos, and learning about candidates through the content that shows up every day.</p>
+        </div>
+        <div class="stats-grid" aria-label="Social media statistics">
+          <div class="stat"><strong>253M</strong><span>social media user identities in the United States</span></div>
+          <div class="stat"><strong>84%</strong><span>of U.S. adults use YouTube</span></div>
+          <div class="stat"><strong>71%</strong><span>of U.S. adults use Facebook</span></div>
+          <div class="stat"><strong>50%</strong><span>of U.S. adults use Instagram</span></div>
+          <div class="stat"><strong>53%</strong><span>of U.S. adults at least sometimes get news from social media</span></div>
+          <div class="stat"><strong>43%</strong><span>of adults ages 18-29 regularly get news on TikTok</span></div>
+          <div class="stat"><strong>$1.9B+</strong><span>spent on online political ads during the 2024 election</span></div>
+          <div class="stat"><strong>81%</strong><span>of people ages 18-65 get their news through social media</span></div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="split">
+          <div>
+            <p class="section-kicker">About</p>
+            <h2>Visibility is no longer optional.</h2>
+          </div>
+          <div>
+            <p class="copy">Political Edge is a political media and content production company built for candidates, campaigns, and public figures.</p>
+            <p class="copy">The team’s résumé includes work for the First Lady, movie promotional content, major university sports programs, and political candidates across the United States.</p>
+            <p class="copy">With experience in social media production, commercial shooting, campaign content, and political storytelling, we create content that feels professional, authentic, and effective.</p>
+            <div class="about-lines">
+              <p>The right video can introduce a candidate.</p>
+              <p>The right clip can change perception.</p>
+              <p>The right moment can define a campaign.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="contact-band">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2>Make the message impossible to ignore.</h2>
+            <p>Start building campaign content that voters will watch, feel, and remember.</p>
+          </div>
+          <div class="contact-list">
+            <a href="mailto:info@politcaledge.com">info@politcaledge.com</a>
+            <a href="tel:5555555555">555-555-5555</a>
+            <span class="placeholder">Placeholder contact info</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Political Edge</span>
+      <span>Campaign content for today’s media environment</span>
+    </footer>
+  </div>
+</body>
+</html>
